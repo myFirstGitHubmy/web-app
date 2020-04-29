@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>Calculator</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<STYLE TYPE="text/css">
+ BODY {
+   background: F5DEB3;
+   color: 8B4513;
+ }
+ INPUT {width: 45px;
+}
+</STYLE>
+<SCRIPT Language="JavaScript">
+
+var num1=0, num2=0, oper=0;
+
+
+
+function plug()
+  {
+  document.Calc.monitor.value='';
+  num1=0; num2=0; oper=0;
+  document.Calc.b0.disabled=0; document.Calc.b1.disabled=0; document.Calc.b2.disabled=0;
+  document.Calc.b3.disabled=0; document.Calc.b4.disabled=0; document.Calc.b5.disabled=0;
+  document.Calc.b6.disabled=0; document.Calc.b7.disabled=0; document.Calc.b8.disabled=0;
+  document.Calc.b9.disabled=0; document.Calc.div.disabled=0; document.Calc.off.disabled=0;
+  document.Calc.mult.disabled=0; document.Calc.sqr.disabled=0; document.Calc.sqrt.disabled=0;
+  document.Calc.subt.disabled=0; document.Calc.fix.disabled=0; document.Calc.res.disabled=0;
+  document.Calc.add.disabled=0;  document.Calc.b.disabled=0;
+  };
+
+function shut()
+  {
+  document.Calc.monitor.value='';
+  num1=0; num2=0; oper=0;
+  document.Calc.b0.disabled=1; document.Calc.b1.disabled=1; document.Calc.b2.disabled=1;
+  document.Calc.b3.disabled=1; document.Calc.b4.disabled=1; document.Calc.b5.disabled=1;
+  document.Calc.b6.disabled=1; document.Calc.b7.disabled=1; document.Calc.b8.disabled=1;
+  document.Calc.b9.disabled=1; document.Calc.div.disabled=1; document.Calc.off.disabled=1;
+  document.Calc.mult.disabled=1; document.Calc.sqr.disabled=1; document.Calc.sqrt.disabled=1;
+  document.Calc.subt.disabled=1; document.Calc.fix.disabled=1; document.Calc.res.disabled=1;
+  document.Calc.add.disabled=1; document.Calc.b.disabled=1;
+  };
+
+function digit(num)
+  {
+  document.Calc.monitor.value+=num;
+  };
+
+function back()
+  {
+  var str = document.Calc.monitor.value;
+  str = str.substring(0,str.length-1);
+  document.Calc.monitor.value=str;
+  };
+
+function squar(check)
+  {
+  var val=document.Calc.monitor.value;
+  (check) ? val=val*val : val=Math.sqrt(val);
+  document.Calc.monitor.value=val;
+  };
+
+function expr(op)
+  {
+  num1=document.Calc.monitor.value;
+  document.Calc.monitor.value='';
+  if (num1!=false) oper=op;
+ else alert('������� ��������');
+  };
+
+function result()
+ {
+  var R, c=1;
+  num2=document.Calc.monitor.value;
+  switch (oper) {
+    case 1 : R=num1/num2; break;
+    case 2 : R=num1*num2; break;
+    case 3 : R=num1-num2; break;
+    case 4 : R=num1*c+num2*c; }
+  document.Calc.monitor.value=R;
+  };
+
+
+
+</SCRIPT>
+</HEAD>
+<BODY>
+<FORM name="Calc">
+ <DIV align="center" size="200">
+ <H3>Calculator</H3>
+  <TABLE frame="box" border="2">
+  <TR><INPUT type="text" name="monitor" style="width: 260px; text-align: right"></TR>
+  <TR>
+  <TD><INPUT type="button" name="b7" value="7" disabled="1" onClick="digit(7)"></TD>
+  <TD><INPUT type="button" name="b8" value="8" disabled="1" onClick="digit(8)"></TD>
+  <TD><INPUT type="button" name="b9" value="9" disabled="1" onClick="digit(9)"></TD>
+  <TD><INPUT type="button" name="div" value="/" disabled="1" onClick="expr(1)"></TD>
+  <TD><INPUT type="button" name="off" value="OFF" disabled="1" onClick="shut()"></TD>
+  <TD rowspan="4"><INPUT style="width: 100%; height: 100px;" type="button" name="b" value="B" disabled="1" onClick="back()"></TD> 
+  </TR>
+  <TR>
+  <TD><INPUT type="button" name="b4" value="4" disabled="1" onClick="digit(4)"></TD>
+  <TD><INPUT type="button" name="b5" value="5" disabled="1" onClick="digit(5)"></TD>
+  <TD><INPUT type="button" name="b6" value="6" disabled="1" onClick="digit(6)"></TD>
+  <TD><INPUT type="button" name="mult" value="*" disabled="1" onClick="expr(2)"></TD>
+  <TD><INPUT type="button" name="sqr" value="SQR" disabled="1" onClick="squar(1)"></TD>
+  </TR>
+  <TD><INPUT type="button" name="b1" value="1" disabled="1" onClick="digit(1)"></TD>
+  <TD><INPUT type="button" name="b2" value="2" disabled="1" onClick="digit(2)"></TD>
+  <TD><INPUT type="button" name="b3" value="3" disabled="1" onClick="digit(3)"></TD>
+  <TD><INPUT type="button" name="subt" value="-" disabled="1" onClick="expr(3)"></TD>
+  <TD><INPUT type="button" name="sqrt" value="SQRT" disabled="1" onClick="squar(0)"></TD>
+  </TR>
+  <TR>
+  <TD><INPUT type="button" name="b0" value="0" disabled="1" onClick="digit(0)"></TD>
+  <TD><INPUT type="button" name="fix" value="." disabled="1" onClick="digit('.')"></TD>
+  <TD><INPUT type="button" name="res" value="=" disabled="1" onClick="result()"></TD>
+  <TD><INPUT type="button" name="add" value="+" disabled="1" onClick="expr(4)"></TD>
+  <TD><INPUT type="button" name="fault" value="ON/C" onClick="plug()"></TD>
+  </TR>
+  </TABLE>
+ </DIV>
+</FORM>
+</BODY>
+</HTML>
+<!-- <TD><INPUT type="button" name="sqrt" value="SQRT" disabled="1" onClick="squar(0)"></TD> -->

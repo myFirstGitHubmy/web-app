@@ -1,0 +1,115 @@
+<HTML>
+<head>
+<title>Генерация паролей</title>
+<meta http-equiv= "content-type"content="text/html;charset=utf-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<BODY style="margin-left: 50px;">
+  <pre>
+    Задача №4
+    Реализовать программу для генерации паролей пользователей. Программа должна формировать случайную последовательность символов длины L, 
+    при этом должен использоваться алфавит из A символов.
+    </pre>
+
+  <input class="input-group-text" style="width: 300px;" type="text" id="length" placeholder="Длина последовательности"></br>
+  <!-- <input type="text" id="countPassword" placeholder="Введите количество паролей"></br> -->
+  <select class="custom-select" style="width: 300px;" id="view">
+    <option value="latB" selected>Латинские символы</option>
+    <option value="code09">Цифры</option>
+    <option value="symbol">символ</option>
+    <option value="utf8">Русские символы</option>
+  </select></br>
+
+  <button class="btn btn-primary" style="margin-top: 20px;" onclick="l()">Generate password</button></br>
+  <span id="genPass" hidden>Сгенерированный пароль</span>
+  
+  <pre class="h2" id="windowpass"></pre>
+
+  
+  <script>
+    function massiveKey(massMap){
+      let massKey = new Array;
+      
+    for (let pair of massMap.keys()){
+      let i = 0;
+     
+        massKey[i] = pair;
+        i++
+      } 
+
+      return massKey;
+    }
+
+    function massiveValue(massMap){
+      let massValue = new Array;
+      
+    for (let pair of massMap.values()){
+      let i = 0;
+      
+        massValue[i] = pair;
+        i++
+      } 
+
+      return massValue;
+    }
+
+
+    function cycle(str,countSymbol,countPassword,lengthMass){
+      var password = "";
+      var intervCode = "";
+      var auth = new Map();
+      for (let j = 0; j < countPassword; j++){
+      for (let i = 0; i< countSymbol; i++){
+          let rand = Math.round(Math.random() * lengthMass);
+          password += str[rand];
+          intervCode += str.charCodeAt(rand) + " ";
+          // console.log(rand + " " + intervCode);
+      }
+      auth.set(password, intervCode);
+      }
+
+      return auth;
+    }
+
+    function l(){
+      var lat = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      var cod = "0123456789";
+      var symb = "!\"#$%&\'"; 
+      var ut8 = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+
+      var countSymbol = document.getElementById('length').value;
+      var typeView = document.getElementById('view').value;
+      // var countPassword = document.getElementById('countPassword').value;
+      var countPassword = 1;
+      var cycleMap;
+      var cycleMapKey;
+      var cycleMapValue;
+
+      switch(typeView){
+        case "latB": cycleMap = cycle(lat,countSymbol,countPassword,lat.length-1); break;
+        case "code09": cycleMap = cycle(cod,countSymbol,countPassword,cod.length-1);break;
+        case "symbol": cycleMap = cycle(symb,countSymbol,countPassword,symb.length-1);break;
+        default : cycleMap = cycle(ut8,countSymbol,countPassword,ut8.length-1);break;
+      }
+
+      cycleMapKey = massiveKey(cycleMap);
+      cycleMapValue = massiveValue(cycleMap);
+    
+    printPage(cycleMapKey, cycleMapValue);
+
+      
+    }
+
+    function printPage(makey, mavalue){
+    
+      document.getElementById('genPass').hidden=false;
+      for(let i = 0; i< makey.length;i++){
+       document.getElementById('windowpass').innerHTML ="<h3>Pass: " + makey[i] + "\n Listing: " + mavalue[i] + "</h3>";
+    }
+    }
+    
+  </script>
+
+
+</BODY>
+</HTML>

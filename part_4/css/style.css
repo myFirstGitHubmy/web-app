@@ -1,0 +1,42 @@
+PRE{
+  font-family: 'Spicy Rice', cursive;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: oblique;
+  font-size: 15px;
+  color: #3c0e4d;
+  background-color: #60f765;
+  width: 800px;
+  border-radius: 15px;
+  margin-left: 100px;
+}
+p{
+   font-family: 'Spicy Rice', cursive;
+font-family: 'Noto Sans KR', sans-serif; 
+  font-family: 'Source Code Pro', monospace;
+  font-style: italic;
+  font-size: 20px;
+  color: #570202;
+  background-color: #ebf760;
+  width: 800px;
+  border-radius: 15px;
+  padding-left: 20px;
+}
+OL{
+  font-family: 'Source Code Pro', monospace;
+  font-style: initial;
+  background-color: #6e40ed;
+  border-radius: 10px;
+  margin-left: 20px;
+  padding-left: 50px;
+}
+UL{
+  font-family: 'Spicy Rice', cursive;
+  font-style: initial;
+  background-color: #6af799;
+  border-radius: 10px;
+  margin-left: 20px;
+  padding-left: 50px;
+}
+h2:hover{
+  color: red;
+}

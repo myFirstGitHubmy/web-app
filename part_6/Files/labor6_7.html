@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zad_7</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        form{
+            margin-left: 20px;
+        }
+
+        input{
+            border-radius: 5px;
+        }
+
+        .valid{
+      background: url(images/check.svg);
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: 20px ;
+            border: 1px solid green;
+        }
+        span{
+            color: red;
+        }
+
+        .invalid{
+            border: 1px solid red;
+        }
+
+        body{
+            margin-left: 100px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div style="width: 500px; border: 5px; border-color: aliceblue; border-style: solid; ">
+    <div style="text-align: center;">
+        <h1>Form registration user</h1>
+    </div>
+        <form method="POST" id="form_id" onsubmit="alert('Регистрация прошла успешно!')" class="formValidation" onsubmit="return checkForm(this);">
+            <div>
+                <div>
+                    <div>
+                        <label for="lastName">Lastname</label>
+                            
+                    </div>
+                    <div>
+                        <input type="text" data-rule="lastName" name="lastName"id="lastname" required placeholder="Enter your lastname "/>
+                        <span id="lastspan" hidden>Это поле должно содержать латинские буквы в нижнем регистре (example: ivanov)</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>
+                        <label for="firstName">Firstname</label>
+                    </div>
+                    <div>
+                        <input type="text" data-rule="firstName" name="firstName" class="firstname" required placeholder="Enter your firstname "/>
+                        <span id="firstspan" hidden>Это поле должно содержать латинские буквы в нижнем регистре (example: ivan)</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>
+                        <label for="sex">Sex</label>
+                    </div>
+                    <div>
+                        <input type="radio" data-rule="sex" name="sex" value="М" checked="checked" class="sex"/>M
+                        <input type="radio" data-rule="sex" name="sex" value="Ж" class="sex"/>Ж
+                    </div>
+                </div>
+                
+
+                <div>
+                    <div>
+                        <label for="email">Email</label>
+                    </div>
+                    <div>
+                        <input type="email" data-rule="email" name="email" id="email" class="email" required placeholder="Enter your email"/>
+                        <span id="emailspan" hidden>Это поле должно содержать E-Mail в формате example@site.com</span>
+                        <p id="message"></p>
+                    </div>
+                </div>
+                
+                
+                <div>
+                    <div>
+                        <label for="birthday">Birthday</label>
+                    </div>
+                    <div>
+                        <input type="date" data-rule="birthday" name="birthday" class="birthday" required/>
+                    </div>
+                </div>
+                
+                    <div>
+                        <div>
+                            <label for="studies">Study</label>
+                        </div>
+                        <div>
+                            <select name="studies" data-rule="studies" id="studies" class="study" >
+                                <option value=""></option>
+                                <option selected value="srOb">Среднее общее</option>
+                                <option value="srPro">Среднее профессиональное</option>
+                                <option value="nohigh">Незаконченное высшее</option>
+                                <option value="high">Высшее</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div>
+                        <div>
+                            <label for="login">Login</label>
+                            
+                        </div>
+                        <div>
+                            <input type="text" data-rule="login" name="login" class="login" required/>
+                            <span id="loginspan" hidden>Это поле должно содержать только цифры и латинские буквы</span>
+                        </div>
+                    </div>
+                
+                <div>
+                    <div>
+                        <label for="password">Password</label>
+                    </div>
+                    <div>
+                        <input type="password" id = "password" name="password" data-rule="password" class="password" required/>
+                        <span id="passspan" hidden>Это поле должно содержать только цифры и латинские буквы</span><br>
+                        
+                        <input type="password" id = "repassword" name="repassword" data-rule="repassword" class="repassword" required/>
+                        <span id="repassspan" hidden>Пароли не совпадают</span>
+                    </div>
+                </div>
+                
+                <div>
+                        <div>
+                        <input type="submit" value="Send"/>
+                    </div>
+                </div>       
+            </div>
+        </form>
+    </div>
+
+        <script>
+            let inputs = document.querySelectorAll('input[data-rule]');
+            console.log(inputs);
+
+            for (let input of inputs){
+                input.addEventListener('blur', function(){
+                    let rule = this.dataset.rule;
+                    let value = this.value;
+                    let check;
+                    let span;
+                    switch(rule){
+                        case 'lastName':
+                        check = /^[a-z]+$/.test(value);
+                        span = document.getElementById('lastspan');
+                        break;
+
+                        case 'firstName':
+                            check = /^[a-z]+$/.test(value);
+                            span = document.getElementById('firstspan');
+                        break;
+
+                        case 'sex':
+
+                        break;
+
+                        case 'email':
+                            check = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(value);
+                            span = document.getElementById('emailspan');
+                        break;
+
+                        case 'birthday':
+                            check = true;
+                        break;
+
+                        case 'login':
+                           check = /^[a-zA-Z1-9]+$/.test(value);
+                           span = document.getElementById('loginspan');
+                        break;
+
+                        case 'password':
+                            check = /^[a-zA-Z1-9]+$/.test(value);
+                            span = document.getElementById('passspan');
+                            pass = value;
+
+                        break;
+
+                        case 'repassword':
+                            // if (document.getElementsByName('repassword').value === document.getElementsByName('password').value) {
+                                pas = document.getElementById('password');
+                                pas2 = document.getElementById('repassword');
+                                if (pas.value == pas2.value){
+                                    check=/^[a-zA-Z1-9]+$/.test(value);
+                                }
+                                span = document.getElementById('repassspan');
+                        break;
+
+                        case 'studies':
+                               if (document.getElementById('studies[option]').value != "")
+                               check = true 
+                        break;
+
+
+                    }
+                    this.classList.remove('valid');
+                    this.classList.remove('invalid');
+                    if (check){
+                        this.classList.add('valid');
+                        span.hidden = true;
+                    }
+                    else{
+                        this.classList.add('invalid');
+                        span.hidden = false;
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

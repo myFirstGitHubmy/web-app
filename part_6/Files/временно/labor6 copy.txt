@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labor 6</title>
+</head>
+<body>
+    <script>
+        let name = prompt("Как тебя зовут?");
+
+        while(name == '' || name == null){
+            name = prompt("Как тебя зовут?");
+        }
+
+        alert("Давай сыграем в игру. Я загадал число от 1 до 100, а тебе нужно угадать, что это за число");
+
+        let numb = Math.round(Math.random() * 100);
+        let guess = prompt("Какое это число?");
+        let countTry = 0;
+
+        while(guess != numb){
+            if (guess < numb){
+                guess = prompt("Мало. Попробуй еще!");
+                countTry++;
+            }
+            if(guess>numb){
+                guess = prompt("Много. Попробуй еще!");
+                countTry++;
+            }
+        }
+
+        alert("Молодец " + name + "! Это число " + numb + ". Кол-во попыток: " + countTry);
+    </script>
+</body>
+</html>
