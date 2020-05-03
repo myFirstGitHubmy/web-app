@@ -1,0 +1,64 @@
+body{
+  background: #c2c2c2;
+  color: fffcad;
+}
+
+p{
+   font-family: 'Century Gothic', cursive;
+  font-style: oblique;
+  font-size: 18;
+  color: #f0f0f0;
+  background-color: #e08db6;
+  width: 800;
+  border-radius: 15;
+  padding-left: 25;
+ 
+}
+OL{
+  font-family: 'Century Gothic', display;
+  font-style: italic;
+  color: #f0f0f0;
+  background-color: #ffa1ce;
+  border-radius: 12;
+  margin-left: 25;
+  border-left: 1px dotted red;
+  padding: 20;
+  
+}
+UL{
+  font-family: 'Century Gothic', serif;
+  font-style: italic;
+  color: #f0f0f0;
+  background-color: #ff8ac2;
+  border-radius: 12;
+  margin-left: 22;
+  border: 2px solid #700050;
+  padding: 20;
+  
+}
+  PRE{
+    text-align: center;
+    overflow: auto;         
+  font-family: 'Century Gothic', serif;
+  font-style: normal;
+  font-size: 18;
+  color: #f0f0f0;
+  background-color: #9e5176;
+  width: 850;
+  border-radius: 18;
+  margin-left: 120;
+}
+h2:hover{
+  color: 9cb1ff;
+}
+
+/* div {
+  
+ text-align: center;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  resize: both;
+} */
