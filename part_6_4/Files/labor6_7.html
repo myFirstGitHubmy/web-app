@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zad_7</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/styleForm.css">
+    
+</head>
+<body>
+    <div style="width: 1000px; border: 5px; border-color: aliceblue; border-style: solid; ">
+    <div style="text-align: center;">
+        <h1>Оценка социального пакета</h1>
+    </div>
+        <form method="POST" id="form_id" onsubmit="alert('Спасибо вам!')" class="formValidation" onsubmit="return checkForm(this);">
+                              
+            <div>
+                <div>
+                    <div>
+                        <label for="sex">1. Ваш пол:<b>*</b></label>
+                    </div>
+                    <div>
+                        <input style="transform:scale(1.2); margin: 10px;" type="radio" data-rule="sex" name="sex" value="М" checked="checked" class="sex"/>M
+                        <input style="transform:scale(1.2); margin: 10px;" type="radio" data-rule="sex" name="sex" value="Ж" class="sex "/>Ж
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="age">2. Возраст (полных лет):<b>*</b></label>
+                    </div>
+                    <div>
+                        <input type="date" data-rule="age" name="age" class="form-control" required/>
+                        <span  id="lastspan" hidden></span>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>
+                        <label for="position">3. Позиция (должность): <b>*</b></label>
+                    </div>
+                    <div>
+                        <input type="text" pattern="^[а-яА-Я]+$" data-rule="position" name="position" class="position form-control" required placeholder="Enter your position "/>
+                        <span id="position" hidden>Заполните поле обязательное поле</span>
+                    </div>
+                </div>
+                
+                
+                
+
+                <div>
+                    <div>
+                        <label for="email">4. Email <b>*</b></label>
+                    </div>
+                    <div>
+                        <input type="email" data-rule="email" name="email" id="email" class="email form-control" required placeholder="Enter your email"/>
+                        <span id="emailspan" hidden>Это обязательное поле должно содержать E-Mail в формате example@site.com</span>
+                        <p id="message"></p>
+                    </div>
+                </div>
+                
+                    <div>
+                        <div>
+                            <label for="socialPacket">5. Образование: <b>*</b> </label>
+                        </div>
+                            <div class="container">
+                                <select class="form-control" name="studies" id="studies">
+                                    <option selected>Среднее общее</option>
+                                    <option>Среднее специальное</option>
+                                    <option>Высшее</option>
+                                    <option>Несколько высших / ученая степень / ученое звание</option>
+                                </select>
+                        </div>
+                    </div>
+                
+                    <div>
+                        <div>
+                            <label for="textarea">6. Что, на Ваш взгляд, необходимо включить в социальный пакет, предоставляемый Компанией сотрудникам, занимающим Вашу позицию?<b>*</b></label>
+                            
+                        </div>
+                        <div>
+                            <input pattern="^[а-яА-Я]+$" type="text"  cols="50" data-rule="textarea" name="textarea" class="form-control" required>
+                            <span id="loginspan" hidden>Это обязательное поле должно содержать только цифры и русские буквы</span>
+                        </div>
+                    </div>
+                
+                <div>
+                        <div>
+                        <input class="btn btn-secondary btn-sm" type="submit" value="Отправить"/>
+                    </div>
+                </div>       
+            </div>
+        </form>
+    </div>
+
+        <script>
+            let inputs = document.querySelectorAll('input[data-rule]');
+            console.log(inputs);
+
+            for (let input of inputs){
+                input.addEventListener('blur', function(){
+                    let rule = this.dataset.rule;
+                    let value = this.value;
+                    let check;
+                    let span;
+                    switch(rule){
+                        case 'age':
+                        // console.log(value);
+                        let birthDay = new Date(value);
+                        document.getElementById('lastspan').style="color:red;"
+                        let fullYear = Math.floor((new Date()-birthDay)/1000/60/60/24/365);
+                        // check = /^(\d{2})\.(\d{2})\.(\d{4})$/.test(value);
+                        check =/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(value);
+                        if (fullYear < 0){
+                            document.getElementById('lastspan').innerHTML = "Неверная дата рождения!"  
+                            document.getElementById('lastspan').hidden = false;  
+                        }
+                        else if (fullYear >= 0){
+                            document.getElementById('lastspan').innerHTML = "(" + fullYear + " года/лет)";
+                            document.getElementById('lastspan').style="color: indigo;"
+                            span = document.getElementById('lastspan').hidden = false;
+                        }
+                        break;
+
+                        case 'position':
+                            check = /^[а-яА-Я]+$/.test(value);
+                            
+                            span = document.getElementById('position');
+                        break;
+
+                        case 'email':
+                            check = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(value);
+                            span = document.getElementById('emailspan');
+                        break;
+
+                        case 'textarea':
+                            check = /^[а-яА-Я1-9]+$/.test(value);
+                            span = document.getElementById('loginspan');
+                            pass = value;
+
+                        break;
+
+
+                    }
+                    this.classList.remove('valid');
+                    this.classList.remove('invalid');
+                    if (check){
+                        this.classList.add('valid');
+                        span.hidden = true;
+                    }
+                    else{
+                        this.classList.add('invalid');
+                        span.hidden = false;
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

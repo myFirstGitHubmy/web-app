@@ -1,0 +1,46 @@
+select{
+    border-radius: 5px;
+}
+
+form{
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+input{
+    border-radius: 5px;
+}
+.valid{
+    background: url(images/check.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 20px ;
+            border: 2px solid #75fa8c;
+}
+span{
+    color: #b30b0b;
+}
+
+.invalid{
+    border: 1px solid #ed4e4e;
+}
+
+body{
+    margin-left: 100px;
+}
+b{
+    color: red;
+}
+
+text{
+    margin: 14px;
+    
+}
+
+.radio{
+    width: 250px;
+    height: 53px;
+    margin-left: 350px;
+    
+    /* position: absolute; */
+}
